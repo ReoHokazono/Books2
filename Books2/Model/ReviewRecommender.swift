@@ -28,6 +28,12 @@ class ReviewRecommender {
             return
         }
         
+        #if DEBUG
+        guard !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
+            return
+        }
+        #endif
+        
         
         let twoSecsFromNow = DispatchTime.now() + 2
         

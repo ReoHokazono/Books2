@@ -124,16 +124,23 @@ struct ContentView: View {
             .onAppear(perform: {
                 #if DEBUG
                 if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && !isISBNListAdded {
-                    screenshotISBNList.forEach { (isbn) in
-                        self.addBookInfo(isbn: isbn)
+                    DispatchQueue(label: "test queue").async {
+                        screenshotISBNList.forEach { (isbn) in
+                            let semaphore = DispatchSemaphore(value: 0)
+                            self.addBookInfo(isbn: isbn) {
+                                semaphore.signal()
+                            }
+                            semaphore.wait()
+                        }
                     }
+                    
                     isISBNListAdded = true
                 }
                 #endif
             })
     }
     
-    private func addBookInfo(isbn: String) {
+    private func addBookInfo(isbn: String, completion: @escaping () -> () = {}) {
         guard allItems.filter({ $0.isbn == isbn }).isEmpty else {
             return
         }
@@ -147,10 +154,10 @@ struct ContentView: View {
                         let bookInfo = record.bookInfo(context: viewContext)
                         self.saveBookInfo(bookInfo: bookInfo)
                     }
-                case .failure(let error):
+                    completion()
+                case .failure(_):
                     FeedbackGenerator.shared.feedback(isSuccess: false)
                     isNotFoundAlertPresented = true
-                    print(error)
                 }
             }
         }

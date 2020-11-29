@@ -93,7 +93,7 @@ struct BookDetail: View {
                         self.saveUserNote()
                     }
                     .isScrollEnabled(false)
-                    .frame(minHeight: 80)
+                    .frame(minHeight: 60)
                 }
                 
                 
