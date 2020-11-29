@@ -15,7 +15,7 @@ protocol BookViewDisplayable {
 }
 
 protocol BookInfoSpotlightSearchable {
-    var isbn: String? { get set }
+    var bookInfoId: String? { get set }
     var title: String? { get set }
     var subtitle: String? { get set }
     var contributorNames: [String]? { get set }

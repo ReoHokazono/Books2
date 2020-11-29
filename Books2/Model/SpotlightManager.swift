@@ -12,7 +12,7 @@ fileprivate let bookInfoDomainIdentifier = "bookInfo"
 
 class SpotlightManager {
     class func updateItem(item: BookInfoSpotlightSearchable) {
-        guard let isbn = item.isbn else { return }
+        guard let bookInfoId = item.bookInfoId else { return }
         let attributeSet = CSSearchableItemAttributeSet(contentType: .text)
         attributeSet.title = {
             if let subtitle = item.subtitle {
@@ -33,13 +33,12 @@ class SpotlightManager {
         
         attributeSet.keywords = {
             if let contributorNames = item.contributorNames {
-                return [isbn] + contributorNames
+                return [bookInfoId] + contributorNames
             } else {
-                return [isbn]
+                return [bookInfoId]
             }
         }()
-        print("Indexing: \(isbn)")
-        let searchableItem = CSSearchableItem(uniqueIdentifier: isbn, domainIdentifier: bookInfoDomainIdentifier, attributeSet: attributeSet)
+        let searchableItem = CSSearchableItem(uniqueIdentifier: bookInfoId, domainIdentifier: bookInfoDomainIdentifier, attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([searchableItem]) { (error) in
             guard let error = error else { return }
             fatalError("error: \(error.localizedDescription)")
@@ -47,17 +46,15 @@ class SpotlightManager {
     }
     
     class func removeItemFromIndex(item: BookInfoSpotlightSearchable) {
-        guard let isbn = item.isbn else { return }
-        print("Delete Index: \(isbn)")
-        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [isbn]) { (error) in
+        guard let bookInfoId = item.bookInfoId else { return }
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [bookInfoId]) { (error) in
             guard let error = error else { return }
             fatalError("error: \(error.localizedDescription)")
         }
     }
     
-    class func removeItemFromIndex(isbn: String) {
-        print("Delete Index: \(isbn)")
-        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [isbn]) { (error) in
+    class func removeItemFromIndex(bookInfoId: String) {
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [bookInfoId]) { (error) in
             guard let error = error else { return }
             fatalError("error: \(error.localizedDescription)")
         }

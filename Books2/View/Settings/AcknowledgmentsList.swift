@@ -25,8 +25,6 @@ struct AcknowledgmentsList: View {
             }
         }
         .navigationBarTitle("謝辞", displayMode: .inline)
-//        .navigationTitle("謝辞")
-//        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

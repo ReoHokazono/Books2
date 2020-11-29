@@ -51,6 +51,7 @@ extension DownloadedRecord {
             .reduceWithSpace()
             .collationStringIfAvailable()
         bookInfo.fullText = fullText
+        bookInfo.bookInfoId = UUID().uuidString
         return bookInfo
     }
 }

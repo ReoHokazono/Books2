@@ -7,7 +7,6 @@
 
 import SwiftUI
 import MessageUI
-import CoreSpotlight
 
 struct Settings: View {
     
@@ -58,8 +57,17 @@ struct Settings: View {
                             Spacer().frame(width: 15)
                             Text("CSVファイルを出力")
                         }
-                    })
+                })
 
+                NavigationLink(
+                    destination: iCloudSettingsGuideView(),
+                    label: {
+                        HStack {
+                            Image(systemName: "icloud")
+                            Spacer().frame(width: 15)
+                            Text("iCloud同期")
+                        }
+                })
             
                 Button(action: {
                     guard let url = URL(string: "") else {
@@ -129,7 +137,7 @@ struct Settings: View {
             .sheet(isPresented: $mailViewPresented, content: {
                 MailView(
                     mailViewPresented: $mailViewPresented,
-                    subject: "[APPNAME]: Feedback",
+                    subject: "Keyplate: Feedback",
                     recipient: "hokazono.reo@gmail.com",
                     messageBody: messageBody)
             })

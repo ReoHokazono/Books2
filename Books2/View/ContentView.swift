@@ -10,6 +10,7 @@ import CoreData
 import CoreSpotlight
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
@@ -18,11 +19,17 @@ struct ContentView: View {
         animation: .default)
     private var allItems: FetchedResults<BookInfo>
         
-    @State var selectedBookInfoISBN:String?
+    @State var selectedBookInfoId:String?
     @StateObject var searchControllerProvider = SearchControllerProvider()
     @StateObject var sortManager = SortManager()
     @State var showScannerView = true
     @State var modalPresentedSheet: ModalPresentedSheet?
+    @State var isNotFoundAlertPresented = false
+    
+    #if DEBUG
+    @State var isISBNListAdded = false
+    #endif
+    
     enum ModalPresentedSheet: String, Identifiable {
         var id: String { rawValue }
         case settings, isbnManualInput
@@ -46,7 +53,7 @@ struct ContentView: View {
                     searchText: searchControllerProvider.searchText,
                     sortDescriptors: sortManager.sortDescriptors,
                     isSearchResults: $searchControllerProvider.isSearching,
-                    selectedBookInfoISBN: $selectedBookInfoISBN)
+                    selectedBookInfoId: $selectedBookInfoId)
                     .environment(\.managedObjectContext, viewContext)
             }
             .navigationTitle("本棚")
@@ -100,9 +107,29 @@ struct ContentView: View {
             .onContinueUserActivity(CSSearchableItemActionType, perform: { userActivity in
                 guard let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else { return }
                 let sizeClass = horizontalSizeClass ?? .compact
-                if selectedBookInfoISBN == nil || sizeClass == .regular{
-                    selectedBookInfoISBN = identifier
+                if selectedBookInfoId == nil || sizeClass == .regular{
+                    selectedBookInfoId = identifier
                 }
+            })
+            .onChange(of: scenePhase) { (newScenePhase) in
+                if newScenePhase == .active {
+                    UserDefaults.standard.openAppCount += 1
+                    ReviewRecommender.requestReviewIfNeeded(bookInfoCount: allItems.count)
+                    
+                }
+            }
+            .alert(isPresented: $isNotFoundAlertPresented, content: {
+                Alert(title: Text("書誌情報が見つかりませんでした"), message: Text("書誌情報データベースは、今後のアップデートで拡充する予定です"), dismissButton: .default(Text("了解")))
+            })
+            .onAppear(perform: {
+                #if DEBUG
+                if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && !isISBNListAdded {
+                    screenshotISBNList.forEach { (isbn) in
+                        self.addBookInfo(isbn: isbn)
+                    }
+                    isISBNListAdded = true
+                }
+                #endif
             })
     }
     
@@ -115,11 +142,14 @@ struct ContentView: View {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let record):
+                    FeedbackGenerator.shared.feedback(isSuccess: true)
                     withAnimation {
                         let bookInfo = record.bookInfo(context: viewContext)
                         self.saveBookInfo(bookInfo: bookInfo)
                     }
                 case .failure(let error):
+                    FeedbackGenerator.shared.feedback(isSuccess: false)
+                    isNotFoundAlertPresented = true
                     print(error)
                 }
             }

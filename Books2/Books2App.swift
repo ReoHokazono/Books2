@@ -10,6 +10,7 @@ import CoreSpotlight
 import UIKit
 @main
 struct Books2App: App {
+    
     let persistenceController = PersistenceController.shared
     
     var body: some Scene {
@@ -19,5 +20,6 @@ struct Books2App: App {
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
+        
     }
 }

@@ -25,7 +25,6 @@ class PersistenceController {
     }()
 
     var container: NSPersistentCloudKitContainer!
-    var currentUseiCloud = true
     
     var lastToken: NSPersistentHistoryToken? = nil {
         didSet {
@@ -66,7 +65,7 @@ class PersistenceController {
         return queue
     }()
 
-    func setupContainer(useiCloud: Bool, inMemory: Bool = false) -> NSPersistentCloudKitContainer {
+    func setupContainer(inMemory: Bool = false) -> NSPersistentCloudKitContainer {
         let container = NSPersistentCloudKitContainer(name: "Books2")
         
         guard let description = container.persistentStoreDescriptions.first else {
@@ -76,11 +75,6 @@ class PersistenceController {
         
         description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
         description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-        
-        currentUseiCloud = useiCloud
-        if !useiCloud {
-            container.persistentStoreDescriptions.first?.cloudKitContainerOptions = nil
-        }
         
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -100,15 +94,7 @@ class PersistenceController {
     }
     
     init(inMemory: Bool = false) {
-        self.container = setupContainer(useiCloud: UserDefaults.standard.useiCloud, inMemory: inMemory)
-        
-        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) {
-            [weak self] (_) in
-            guard let self = self else { return }
-            if self.currentUseiCloud != UserDefaults.standard.useiCloud {
-                self.container = self.setupContainer(useiCloud: UserDefaults.standard.useiCloud)
-            }
-        }
+        self.container = setupContainer(inMemory: inMemory)
         
         NotificationCenter.default.addObserver(self, selector: #selector(storeRemoteChange(_:)), name: .NSPersistentStoreRemoteChange, object: nil)
         purgeHistory()
@@ -144,8 +130,8 @@ class PersistenceController {
                         }
                     }
                     if change.changeType == .delete {
-                        if let deletedISBN = change.tombstone?["isbn"] as? String {
-                            SpotlightManager.removeItemFromIndex(isbn: deletedISBN)
+                        if let deletedBookInfoId = change.tombstone?["bookInfoId"] as? String {
+                            SpotlightManager.removeItemFromIndex(bookInfoId: deletedBookInfoId)
                         }
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .itemDeleted, object: change.changedObjectID)

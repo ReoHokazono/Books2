@@ -3,12 +3,13 @@
     <entity name="BookInfo" representedClassName="BookInfo" syncable="YES" codeGenerationType="class">
         <attribute name="addedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="bookDescription" optional="YES" attributeType="String"/>
+        <attribute name="bookInfoId" attributeType="String" defaultValueString="" preserveAfterDeletion="YES"/>
         <attribute name="contributorCollations" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
         <attribute name="contributorNames" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
         <attribute name="contributorRoles" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
         <attribute name="extentValue" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="fullText" optional="YES" attributeType="String"/>
-        <attribute name="isbn" attributeType="String" defaultValueString="" preserveAfterDeletion="YES"/>
+        <attribute name="isbn" attributeType="String" defaultValueString=""/>
         <attribute name="publishedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="publisher" optional="YES" attributeType="String"/>
         <attribute name="resourceLink" optional="YES" attributeType="URI"/>
@@ -21,6 +22,6 @@
         <attribute name="userNoteCollation" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="BookInfo" positionX="-63" positionY="-18" width="128" height="313"/>
+        <element name="BookInfo" positionX="-63" positionY="-18" width="128" height="328"/>
     </elements>
 </model>

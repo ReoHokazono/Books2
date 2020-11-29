@@ -15,12 +15,17 @@ struct AboutView: View {
         Form {
             HStack {
                 Spacer()
-                Text("Bookcat")
+                Text("Keyplate")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding()
                 Spacer()
             }
+            
+            Text("Keyplateは2020年12月から配信を開始しました。まだ開発の初期段階です。みなさまからのフィードバックをお待ちしています。")
+                .font(.callout)
+                .padding([.top, .bottom], 15)
+                .lineSpacing(2)
             
             Button("Blog") {
                 guard let url = URL(string: "https://note.com/hokazono_reo") else { return }

@@ -8,17 +8,29 @@
 import Foundation
 
 struct UserDefaultKey {
-    static let useiCloud = "useiCloud"
     static let displayImages = "displayImages"
+    static let openAppCount  = "openAppCount"
+    static let lastVersionPromptedForReview = "lastVersionPromptedForReview"
 }
 
 extension UserDefaults {
-    var useiCloud: Bool {
+    var openAppCount: Int {
+        set {
+            setValue(newValue, forKey: UserDefaultKey.openAppCount)
+        }
+        
         get {
-            guard let useiCloud = object(forKey: UserDefaultKey.useiCloud) as? Bool  else{
-                return true
-            }
-            return useiCloud
+            integer(forKey: UserDefaultKey.openAppCount)
+        }
+    }
+    
+    var lastVersionPromptedForReview: String {
+        set {
+            setValue(newValue, forKey: UserDefaultKey.lastVersionPromptedForReview)
+        }
+        
+        get {
+            string(forKey: UserDefaultKey.lastVersionPromptedForReview) ?? ""
         }
     }
 }

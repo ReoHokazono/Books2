@@ -11,6 +11,7 @@ import AVFoundation
 
 protocol CaptureViewControllerDelegate: class {
     func isbnCodeDetected(_ isbn:String)
+    func notAuthorized()
 }
 
 class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
@@ -29,7 +30,6 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private let sessionQueue = DispatchQueue(label: "session queue")
     private var setupResult: SessionSetupResult = .success
     private var currentDetectedValue = ""
-    private var feedbackGenerator: UINotificationFeedbackGenerator? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,12 +64,10 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 break
             case .notAuthorized:
                 DispatchQueue.main.async {
-                    // present alert
+                    self.delegate?.notAuthorized()
                 }
-            case .configurationFailed:
-                DispatchQueue.main.async {
-                    // present alert
-                }
+            default:
+                break
             }
         }
     }
@@ -139,8 +137,6 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func startRunning(){
-        feedbackGenerator = UINotificationFeedbackGenerator()
-        feedbackGenerator?.prepare()
         sessionQueue.async {
             if self.setupResult == .success {
                 self.session.startRunning()
@@ -152,7 +148,6 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func stopRunning(){
-        feedbackGenerator = nil
         sessionQueue.async {
             if self.setupResult == .success {
                 self.session.stopRunning()
@@ -178,8 +173,6 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             if let stringValue = metadata.stringValue
             {
                 if (stringValue.hasPrefix("978") || stringValue.hasPrefix("979")) && stringValue != currentDetectedValue {
-                    feedbackGenerator?.notificationOccurred(.success)
-                    feedbackGenerator?.prepare()
                     delegate?.isbnCodeDetected(stringValue)
                     currentDetectedValue = stringValue
                 }

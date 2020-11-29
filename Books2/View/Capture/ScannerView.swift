@@ -12,14 +12,40 @@ struct ScannerView: View {
     
     @State var isRunning:Bool = false
     @State var isFlashOn = false
+    @State var isNotAuthorized = false
+    @Environment(\.openURL) var openURL
+    
     var isbnCodeDetected:(_ isbn:String)->()
     var manualInput: () -> ()
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             if isRunning {
-                CaptureView(isRunning: $isRunning, isFlashOn: $isFlashOn) { (isbn) in
+                CaptureView(
+                    isRunning: $isRunning,
+                    isFlashOn: $isFlashOn,
+                    isNotAuthorized: $isNotAuthorized) { (isbn) in
                     self.isbnCodeDetected(isbn)
+                }
+                
+                if isNotAuthorized {
+                    HStack {
+                        Spacer()
+                        VStack(alignment: .center) {
+                            Spacer()
+                            Text("カメラへのアクセスを許可してください")
+                                .foregroundColor(.white)
+                                .padding(.bottom, 5)
+                                .padding(.top, 25)
+                            Button("「設定」を開く") {
+                                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                                openURL(settingsUrl)
+                            }
+                            .foregroundColor(.accentColor)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
                 }
                 
                 HStack {

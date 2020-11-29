@@ -12,8 +12,8 @@ struct FetchResultsList: View {
     @Environment(\.managedObjectContext) private var viewContext
     var fetchRequest: FetchRequest<BookInfo>
     @Binding var isSearchResults: Bool
-    @Binding var selectedBookInfoISBN: String?
-    init(searchText: String = "", sortDescriptors: [NSSortDescriptor], isSearchResults: Binding<Bool>, selectedBookInfoISBN: Binding<String?>) {
+    @Binding var selectedBookInfoId: String?
+    init(searchText: String = "", sortDescriptors: [NSSortDescriptor], isSearchResults: Binding<Bool>, selectedBookInfoId: Binding<String?>) {
         if searchText.isEmpty {
             fetchRequest = FetchRequest(entity: BookInfo.entity(), sortDescriptors: sortDescriptors, animation: .default)
         } else {
@@ -24,7 +24,7 @@ struct FetchResultsList: View {
             fetchRequest = FetchRequest(entity: BookInfo.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
         }
         _isSearchResults = isSearchResults
-        _selectedBookInfoISBN = selectedBookInfoISBN
+        _selectedBookInfoId = selectedBookInfoId
     }
     @State var sheetItem: BookInfo?
     
@@ -32,8 +32,8 @@ struct FetchResultsList: View {
         ForEach(fetchRequest.wrappedValue) { item in
             NavigationLink(
                 destination: BookDetail(bookInfo: item).environment(\.managedObjectContext, viewContext),
-                tag: item.isbn ?? "",
-                selection: $selectedBookInfoISBN,
+                tag: item.bookInfoId ?? "",
+                selection: $selectedBookInfoId,
                 label: {
                     BookView(bookInfo: item)
                 })

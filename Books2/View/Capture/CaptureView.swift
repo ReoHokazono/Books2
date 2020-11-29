@@ -13,6 +13,7 @@ struct CaptureView: UIViewControllerRepresentable {
     
     @Binding var isRunning:Bool
     @Binding var isFlashOn: Bool
+    @Binding var isNotAuthorized: Bool
     var isbnCodeDetected:(_ isbn:String)->()
     
     func makeCoordinator() -> Coordinator {
@@ -43,6 +44,10 @@ struct CaptureView: UIViewControllerRepresentable {
         
         func isbnCodeDetected(_ isbn: String) {
             parent.isbnCodeDetected(isbn)
+        }
+        
+        func notAuthorized() {
+            parent.isNotAuthorized = true
         }
     }
 }
