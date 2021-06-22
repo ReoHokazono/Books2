@@ -12,8 +12,14 @@ struct FetchResultsList: View {
     @Environment(\.managedObjectContext) private var viewContext
     var fetchRequest: FetchRequest<BookInfo>
     @Binding var isSearchResults: Bool
-    @Binding var selectedBookInfoId: String?
-    init(searchText: String = "", sortDescriptors: [NSSortDescriptor], isSearchResults: Binding<Bool>, selectedBookInfoId: Binding<String?>) {
+    @State var selectedItem: BookInfo?
+    let fillSelectedList: Bool
+    @State var selectedSet: Set<BookInfo>?
+    
+    let bookInfoDetailDismissed = NotificationCenter.default.publisher(for: .bookInfoDetailDismissed)
+    let bookInfoSearched = NotificationCenter.default.publisher(for: .bookInfoSearched)
+    
+    init(searchText: String = "", sortDescriptors: [NSSortDescriptor], isSearchResults: Binding<Bool>) {
         if searchText.isEmpty {
             fetchRequest = FetchRequest(entity: BookInfo.entity(), sortDescriptors: sortDescriptors, animation: .default)
         } else {
@@ -24,22 +30,25 @@ struct FetchResultsList: View {
             fetchRequest = FetchRequest(entity: BookInfo.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
         }
         _isSearchResults = isSearchResults
-        _selectedBookInfoId = selectedBookInfoId
+        fillSelectedList = UIDevice.current.userInterfaceIdiom == .pad
     }
-    @State var sheetItem: BookInfo?
     
     var body: some View {
         ForEach(fetchRequest.wrappedValue) { item in
-            NavigationLink(
-                destination: BookDetail(bookInfo: item).environment(\.managedObjectContext, viewContext),
-                tag: item.bookInfoId ?? "",
-                selection: $selectedBookInfoId,
-                label: {
-                    BookView(bookInfo: item)
-                })
+            Button(action: {
+                NotificationCenter.default.post(name: .bookInfoSelected, object: item)
+                selectedItem = item
+            }, label: {
+                BookView(bookInfo: item)
+            })
+            .foregroundColor(.primary)
+            .listRowBackground((item == selectedItem && fillSelectedList) ? Color.systemFill : Color.systemBackground)
         }
         .onDelete(perform: deleteItems)
-      
+        .onReceive(bookInfoSearched, perform: { output in
+            guard let item = output.object as? BookInfo else { return }
+            selectedItem = item
+        })
         
     }
     

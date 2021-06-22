@@ -12,19 +12,17 @@ import CoreSpotlight
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @FetchRequest(
         sortDescriptors: [],
         animation: .default)
     private var allItems: FetchedResults<BookInfo>
         
-    @State var selectedBookInfoId:String?
     @StateObject var searchControllerProvider = SearchControllerProvider()
     @StateObject var sortManager = SortManager()
     @State var showScannerView = true
     @State var modalPresentedSheet: ModalPresentedSheet?
-    @State var isNotFoundAlertPresented = false
+    @State var alertContent: AlertContent?
     
     #if DEBUG
     @State var isISBNListAdded = false
@@ -33,6 +31,11 @@ struct ContentView: View {
     enum ModalPresentedSheet: String, Identifiable {
         var id: String { rawValue }
         case settings, isbnManualInput
+    }
+    
+    enum AlertContent:String, Identifiable {
+        var id: String { rawValue }
+        case notFound, alredayExist
     }
 
     init() {
@@ -52,11 +55,10 @@ struct ContentView: View {
                 FetchResultsList(
                     searchText: searchControllerProvider.searchText,
                     sortDescriptors: sortManager.sortDescriptors,
-                    isSearchResults: $searchControllerProvider.isSearching,
-                    selectedBookInfoId: $selectedBookInfoId)
+                    isSearchResults: $searchControllerProvider.isSearching)
                     .environment(\.managedObjectContext, viewContext)
             }
-            .navigationTitle("本棚")
+            .navigationTitle("BookNote")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -104,13 +106,6 @@ struct ContentView: View {
                 }
             })
             .searchBar(provider: searchControllerProvider)
-            .onContinueUserActivity(CSSearchableItemActionType, perform: { userActivity in
-                guard let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else { return }
-                let sizeClass = horizontalSizeClass ?? .compact
-                if selectedBookInfoId == nil || sizeClass == .regular{
-                    selectedBookInfoId = identifier
-                }
-            })
             .onChange(of: scenePhase) { (newScenePhase) in
                 if newScenePhase == .active {
                     UserDefaults.standard.openAppCount += 1
@@ -118,9 +113,14 @@ struct ContentView: View {
                     
                 }
             }
-            .alert(isPresented: $isNotFoundAlertPresented, content: {
-                Alert(title: Text("書誌情報が見つかりませんでした"), message: Text("書誌情報データベースは、今後のアップデートで拡充する予定です"), dismissButton: .default(Text("了解")))
+            .alert(item: $alertContent, content: { (content) -> Alert in
+                if content == .notFound {
+                    return Alert(title: Text("書誌情報が見つかりませんでした"), message: Text("書誌情報データベースは、今後のアップデートで拡充する予定です"), dismissButton: .default(Text("了解")))
+                } else {
+                    return Alert(title: Text("すでに追加済みです"), message: nil, dismissButton: .default(Text("了解")))
+                }
             })
+
             .onAppear(perform: {
                 #if DEBUG
                 if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && !isISBNListAdded {
@@ -142,6 +142,8 @@ struct ContentView: View {
     
     private func addBookInfo(isbn: String, completion: @escaping () -> () = {}) {
         guard allItems.filter({ $0.isbn == isbn }).isEmpty else {
+            FeedbackGenerator.shared.feedback(isSuccess: false)
+            alertContent = .alredayExist
             return
         }
         
@@ -157,7 +159,7 @@ struct ContentView: View {
                     completion()
                 case .failure(_):
                     FeedbackGenerator.shared.feedback(isSuccess: false)
-                    isNotFoundAlertPresented = true
+                    alertContent = .notFound
                 }
             }
         }

@@ -9,5 +9,7 @@ import Foundation
 
 extension Notification.Name {
     static let itemDeleted = Notification.Name("itemDeleted")
-    static let useiCloudChanged = Notification.Name("useiCloudChanged")
+    static let bookInfoSelected = Notification.Name("bookInfoSelected")
+    static let bookInfoDetailDismissed = Notification.Name("bookInfoDetailDismissed")
+    static let bookInfoSearched = Notification.Name("bookInfoSearched")
 }

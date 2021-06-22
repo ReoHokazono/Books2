@@ -12,6 +12,8 @@
 		50192FFF25554777006F137F /* ISBNFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50192FFE25554777006F137F /* ISBNFormatter.swift */; };
 		50288BBB255D5D1700D547AE /* ISBNFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50288BBA255D5D1700D547AE /* ISBNFormatterTests.swift */; };
 		50288BC0255D5FCA00D547AE /* OpenBDAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50288BBF255D5FCA00D547AE /* OpenBDAPITests.swift */; };
+		502E79592574651D002C1196 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502E79582574651D002C1196 /* AppDelegate.swift */; };
+		502E795E25746568002C1196 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502E795D25746568002C1196 /* SceneDelegate.swift */; };
 		50312C4625728BD10047B537 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50312C4525728BD10047B537 /* FeedbackGenerator.swift */; };
 		50312C4B25729F5F0047B537 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50312C4A25729F5F0047B537 /* SnapshotHelper.swift */; };
 		50338A7825666032006CF00D /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50338A7725666032006CF00D /* MailView.swift */; };
@@ -20,6 +22,7 @@
 		50338A8725678C51006CF00D /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50338A8625678C51006CF00D /* UIDeviceExtension.swift */; };
 		50338A8C2567B39D006CF00D /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50338A8B2567B39D006CF00D /* CoreSpotlight.framework */; };
 		50338AA12567CC65006CF00D /* SpotlightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50338AA02567CC65006CF00D /* SpotlightManager.swift */; };
+		505103A325850391006ED0C1 /* EmptyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505103A225850391006ED0C1 /* EmptyDetailView.swift */; };
 		506BB43D255E03D20021C1FE /* ISBNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506BB43C255E03D20021C1FE /* ISBNTextField.swift */; };
 		506BB442255E51070021C1FE /* CSVExproter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506BB441255E51070021C1FE /* CSVExproter.swift */; };
 		506BB447255E82620021C1FE /* CSVExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506BB446255E82620021C1FE /* CSVExportView.swift */; };
@@ -56,6 +59,7 @@
 		50B19C5E2549BDE2001358B8 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B19C5D2549BDE2001358B8 /* ImageCache.swift */; };
 		50B19C63254A59FE001358B8 /* BookDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B19C62254A59FE001358B8 /* BookDetail.swift */; };
 		50B19C67254A5E48001358B8 /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 509A1111254873A600BFB882 /* CaptureViewController.xib */; };
+		50B808852599B96700360F67 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 50B808842599B96700360F67 /* SwiftUIX */; };
 		50CF4A89254AC54700E698CB /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 50CF4A88254AC54700E698CB /* SwiftUIX */; };
 		50CF4A95254ADE3D00E698CB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CF4A94254ADE3D00E698CB /* CloudKit.framework */; };
 		50D082E82572A27F00BBF652 /* ScreenshotISBNList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D082E72572A27F00BBF652 /* ScreenshotISBNList.swift */; };
@@ -90,6 +94,8 @@
 		50192FFE25554777006F137F /* ISBNFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNFormatter.swift; sourceTree = "<group>"; };
 		50288BBA255D5D1700D547AE /* ISBNFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNFormatterTests.swift; sourceTree = "<group>"; };
 		50288BBF255D5FCA00D547AE /* OpenBDAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenBDAPITests.swift; sourceTree = "<group>"; };
+		502E79582574651D002C1196 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		502E795D25746568002C1196 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		50312C4525728BD10047B537 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		50312C4A25729F5F0047B537 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		50338A7725666032006CF00D /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 		50338A8625678C51006CF00D /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		50338A8B2567B39D006CF00D /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		50338AA02567CC65006CF00D /* SpotlightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightManager.swift; sourceTree = "<group>"; };
+		505103A225850391006ED0C1 /* EmptyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetailView.swift; sourceTree = "<group>"; };
 		506BB43C255E03D20021C1FE /* ISBNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNTextField.swift; sourceTree = "<group>"; };
 		506BB441255E51070021C1FE /* CSVExproter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExproter.swift; sourceTree = "<group>"; };
 		506BB446255E82620021C1FE /* CSVExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExportView.swift; sourceTree = "<group>"; };
@@ -140,7 +147,6 @@
 		50B19C582549BDD3001358B8 /* URLImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		50B19C5D2549BDE2001358B8 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		50B19C62254A59FE001358B8 /* BookDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetail.swift; sourceTree = "<group>"; };
-		50CF4A81254ABC7500E698CB /* SwiftUIX-master */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "SwiftUIX-master"; path = "../SwiftUIX-master"; sourceTree = "<group>"; };
 		50CF4A90254ADE2500E698CB /* Books2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Books2.entitlements; sourceTree = "<group>"; };
 		50CF4A94254ADE3D00E698CB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		50D082E72572A27F00BBF652 /* ScreenshotISBNList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotISBNList.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B808852599B96700360F67 /* SwiftUIX in Frameworks */,
 				50E7FD55255DFDED0084DD4F /* SwiftyJSON in Frameworks */,
 				50CF4A95254ADE3D00E698CB /* CloudKit.framework in Frameworks */,
 				50338A8C2567B39D006CF00D /* CoreSpotlight.framework in Frameworks */,
@@ -189,6 +196,7 @@
 				50B19C532549BA47001358B8 /* BookView.swift */,
 				50B19C62254A59FE001358B8 /* BookDetail.swift */,
 				50728BB225601D280041E57F /* FetchResultsList.swift */,
+				505103A225850391006ED0C1 /* EmptyDetailView.swift */,
 				50338A912567B50B006CF00D /* Settings */,
 				50338A8D2567B4F1006CF00D /* Controls */,
 				509A111D254874C300BFB882 /* Capture */,
@@ -292,6 +300,8 @@
 			children = (
 				50CF4A90254ADE2500E698CB /* Books2.entitlements */,
 				509A10A0254727E100BFB882 /* Books2App.swift */,
+				502E79582574651D002C1196 /* AppDelegate.swift */,
+				502E795D25746568002C1196 /* SceneDelegate.swift */,
 				50192FF425554504006F137F /* View */,
 				50192FF525554533006F137F /* Model */,
 				509A10AE254727E300BFB882 /* Info.plist */,
@@ -351,7 +361,6 @@
 				50338A8B2567B39D006CF00D /* CoreSpotlight.framework */,
 				50338A7C256660FB006CF00D /* MessageUI.framework */,
 				50CF4A94254ADE3D00E698CB /* CloudKit.framework */,
-				50CF4A81254ABC7500E698CB /* SwiftUIX-master */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -375,6 +384,7 @@
 			packageProductDependencies = (
 				50CF4A88254AC54700E698CB /* SwiftUIX */,
 				50E7FD54255DFDED0084DD4F /* SwiftyJSON */,
+				50B808842599B96700360F67 /* SwiftUIX */,
 			);
 			productName = Books2;
 			productReference = 509A109D254727E100BFB882 /* Books2.app */;
@@ -449,6 +459,7 @@
 			mainGroup = 509A1094254727E100BFB882;
 			packageReferences = (
 				50E7FD53255DFDED0084DD4F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				50B808832599B96700360F67 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 509A109E254727E100BFB882 /* Products */;
 			projectDirPath = "";
@@ -494,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502E79592574651D002C1196 /* AppDelegate.swift in Sources */,
 				50728BA3255FEE1D0041E57F /* TextCopyModifier.swift in Sources */,
 				509A10AA254727E300BFB882 /* Persistence.swift in Sources */,
 				508C98DC25720F45004868B2 /* iCloudSettingsGuideView.swift in Sources */,
@@ -512,7 +524,9 @@
 				50E79959254D8C1300C7816D /* UserDefaultsKeys.swift in Sources */,
 				509A10A1254727E100BFB882 /* Books2App.swift in Sources */,
 				50D547652560539500B8F568 /* URLExtension.swift in Sources */,
+				505103A325850391006ED0C1 /* EmptyDetailView.swift in Sources */,
 				50A603DF255D941C00E0E3DD /* BookInfoProtocol.swift in Sources */,
+				502E795E25746568002C1196 /* SceneDelegate.swift in Sources */,
 				50B19C63254A59FE001358B8 /* BookDetail.swift in Sources */,
 				509A1114254873A600BFB882 /* CaptureView.swift in Sources */,
 				50E7994F254D7CDB00C7816D /* NotificationNames.swift in Sources */,
@@ -700,6 +714,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Books2/Books2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Books2/Preview Content\"";
 				DEVELOPMENT_TEAM = GU23RALJBB;
 				ENABLE_PREVIEWS = YES;
@@ -709,6 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hokazono.Books2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -723,6 +739,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Books2/Books2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Books2/Preview Content\"";
 				DEVELOPMENT_TEAM = GU23RALJBB;
 				ENABLE_PREVIEWS = YES;
@@ -732,6 +749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hokazono.Books2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -865,6 +883,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		50B808832599B96700360F67 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		50E7FD53255DFDED0084DD4F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -876,6 +902,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		50B808842599B96700360F67 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50B808832599B96700360F67 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
 		50CF4A88254AC54700E698CB /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIX;

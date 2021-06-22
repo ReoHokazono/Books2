@@ -28,6 +28,13 @@ struct ScannerView: View {
                     self.isbnCodeDetected(isbn)
                 }
                 
+//                GeometryReader(content: { geometry in
+//                    Image("Cap")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                })
+
+                
                 if isNotAuthorized {
                     HStack {
                         Spacer()
@@ -65,17 +72,20 @@ struct ScannerView: View {
                     
                     
                     Spacer()
-                    
-                    Button("完了") {
+                    Button(action: {
                         self.isRunning = false
                         self.isFlashOn = false
-                    }
-                    .padding(.horizontal, 20)
-                    .frame(height: 40, alignment: .center)
-                    .background(Color.black)
-                    .foregroundColor(.white)
-                    .cornerRadius(20, style: .continuous)
-                    .padding([.bottom, .leading])
+                    }, label: {
+                        Text("完了")
+                            .padding(.horizontal, 20)
+                            .frame(height: 40, alignment: .center)
+                            .background(Color.black)
+                            .foregroundColor(.white)
+                            .cornerRadius(20, style: .continuous)
+                            .padding([.bottom, .leading])
+                    })
+                    
+                    
                 }
                 .padding()
                 
@@ -92,7 +102,7 @@ struct ScannerView: View {
                                 Text("ISBNコードをスキャン")
                                     .fontWeight(.medium)
                             }
-                            .padding()
+                            .padding(10)
                             .foregroundColor(.accentColor)
                             .background(.systemBackground)
                             .cornerRadius(15, style: .continuous)

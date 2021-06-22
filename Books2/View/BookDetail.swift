@@ -93,7 +93,9 @@ struct BookDetail: View {
                         self.saveUserNote()
                     }
                     .isScrollEnabled(false)
-                    .frame(minHeight: 60)
+  
+//                    .frame(minHeight: 60)
+//                    .padding(.trailing, 5)
                 }
                 
                 
@@ -182,6 +184,9 @@ struct BookDetail: View {
             .onReceive(itemDeleted, perform: { output in
                 guard let changedObjectID = output.object as? NSManagedObjectID else { return }
                 isDeletedItem = changedObjectID == bookInfo.objectID
+            })
+            .onDisappear(perform: {
+                NotificationCenter.default.post(name: .bookInfoDetailDismissed, object: nil)
             })
         }
     }

@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import CoreSpotlight
-import UIKit
-@main
+
+//@main
 struct Books2App: App {
     
     let persistenceController = PersistenceController.shared

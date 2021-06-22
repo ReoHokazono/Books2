@@ -41,24 +41,24 @@ class Books2UITests: XCTestCase {
         sleep(1)
         snapshot("screenshot2")
         if UIDevice.current.userInterfaceIdiom == .phone {
-            app.navigationBars.firstMatch.buttons["本棚"].tap()
+            app.navigationBars.firstMatch.buttons["BookNote"].tap()
         }
-        
-        app.navigationBars["本棚"].buttons["編集"].tap()
+
+        app.navigationBars["BookNote"].buttons["編集"].tap()
         let switch2 = tablesQuery/*@START_MENU_TOKEN@*/.switches["1"]/*[[".cells[\"photo, 書影を表示\"].switches[\"1\"]",".switches[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         switch2.tap()
         app.navigationBars["設定"].buttons["完了"].tap()
         app.tables.firstMatch.swipeDown()
         sleep(1)
         snapshot("screenshot3")
-        
-        app.navigationBars["本棚"].buttons["編集"].tap()
-        
+
+        app.navigationBars["BookNote"].buttons["編集"].tap()
+
         app.tables/*@START_MENU_TOKEN@*/.switches["0"]/*[[".cells[\"photo, 書影を表示\"].switches[\"0\"]",".switches[\"0\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.navigationBars["設定"].buttons["完了"].tap()
         app.tables.firstMatch.swipeDown()
-        
-        app.navigationBars["本棚"].searchFields["検索"].tap()
+
+        app.navigationBars["BookNote"].searchFields["検索"].tap()
         sleep(1)
         snapshot("screenshot4")
     }

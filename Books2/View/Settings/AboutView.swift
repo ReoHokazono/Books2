@@ -13,16 +13,26 @@ struct AboutView: View {
     
     var body: some View {
         Form {
+            
             HStack {
                 Spacer()
-                Text("Keyplate")
+                Image("Logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .width(120)
+                    .padding()
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Text("BookNote")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding()
                 Spacer()
             }
             
-            Text("Keyplateは2020年12月から配信を開始しました。まだ開発の初期段階です。みなさまからのフィードバックをお待ちしています。")
+            Text("BookNoteは2020年12月から配信を開始しました。個人で開発しています。みなさまからのフィードバックをお待ちしています。")
                 .font(.callout)
                 .padding([.top, .bottom], 15)
                 .lineSpacing(2)

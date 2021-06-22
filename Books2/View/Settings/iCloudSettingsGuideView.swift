@@ -24,7 +24,7 @@ struct iCloudSettingsGuideView: View {
                 }
                 HStack(alignment: .top) {
                     Text("3.")
-                    Text("リストから、Keyplateを探し、iCloud同期のオン／オフを変更します。")
+                    Text("リストから、BookNoteを探し、iCloud同期のオン／オフを変更します。")
                 }
             }
             .font(.footnote)

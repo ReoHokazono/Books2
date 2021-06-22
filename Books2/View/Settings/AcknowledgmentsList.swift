@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct AcknowledgmentsList: View {
-    let data = AcknowledgmentsData().data
+    
+    
     var body: some View {
         Form {
-            ForEach(data) { (item) in
+            ForEach(AcknowledgmentsData().data) { (item) in
                 NavigationLink(
                     destination: AcknowledgmentsDetail(item: item),
                     label: {

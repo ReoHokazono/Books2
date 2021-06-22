@@ -44,6 +44,7 @@ struct Settings: View {
             Form {
                 HStack {
                     Image(systemName: "photo")
+                        .width(30)
                     Spacer().frame(width: 15)
                     Text("書影を表示")
                     Toggle("", isOn: $displayImages)
@@ -54,7 +55,8 @@ struct Settings: View {
                     label: {
                         HStack {
                             Image(systemName: "arrow.up.doc")
-                            Spacer().frame(width: 15)
+                                .width(30)
+                             Spacer().frame(width: 15)
                             Text("CSVファイルを出力")
                         }
                 })
@@ -64,30 +66,33 @@ struct Settings: View {
                     label: {
                         HStack {
                             Image(systemName: "icloud")
+                                .width(30)
                             Spacer().frame(width: 15)
                             Text("iCloud同期")
                         }
                 })
             
-                Button(action: {
-                    guard let url = URL(string: "") else {
-                        return
-                    }
-                    openURL(url)
-                }, label: {
-                    HStack {
-                        Image(systemName: "questionmark.circle")
-                        Spacer().frame(width: 15)
-                        Text("使い方・よくある質問")
-                    }
-                })
-                .foregroundColor(.primary)
+//                Button(action: {
+//                    guard let url = URL(string: "https://book-note.netlify.app/help") else {
+//                        return
+//                    }
+//                    openURL(url)
+//                }, label: {
+//                    HStack {
+//                        Image(systemName: "questionmark.circle")
+//                            .width(30)
+//                        Spacer().frame(width: 15)
+//                        Text("使い方・よくある質問")
+//                    }
+//                })
+//                .foregroundColor(.primary)
 
                 Button(action: {
                     contactButtonTapped()
                 }, label: {
                     HStack {
                         Image(systemName: "envelope")
+                            .width(30)
                         Spacer().frame(width: 15)
                         Text("問い合わせ")
                     }
@@ -95,7 +100,7 @@ struct Settings: View {
                 .foregroundColor(.primary)
                 
                 Button(action: {
-                    guard let url = URL(string: "itms-apps://itunes.apple.com/us/app/{sku}/id{id}?action=write-review") else {
+                    guard let url = URL(string: "itms-apps://itunes.apple.com/us/app/booknote/id1546487927?action=write-review") else {
                         return
                     }
                     openURL(url)
@@ -103,6 +108,7 @@ struct Settings: View {
                 }, label: {
                     HStack {
                         Image(systemName: "star.circle")
+                            .width(30)
                         Spacer().frame(width: 15)
                         Text("App Storeで評価")
                     }
@@ -114,6 +120,7 @@ struct Settings: View {
                     label: {
                         HStack {
                             Image(systemName: "doc.append")
+                                .width(30)
                             Spacer().frame(width: 15)
                             Text("謝辞")
                         }
@@ -124,6 +131,7 @@ struct Settings: View {
                     label: {
                         HStack {
                             Image(systemName: "info.circle")
+                                .width(30)
                             Spacer().frame(width: 15)
                             Text("このアプリについて")
                         }
@@ -137,7 +145,7 @@ struct Settings: View {
             .sheet(isPresented: $mailViewPresented, content: {
                 MailView(
                     mailViewPresented: $mailViewPresented,
-                    subject: "Keyplate: Feedback",
+                    subject: "BookNote: Feedback",
                     recipient: "hokazono.reo@gmail.com",
                     messageBody: messageBody)
             })

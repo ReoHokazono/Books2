@@ -73,7 +73,6 @@ class CopyBackgroundUIView: UIView {
             return
         }
         becomeFirstResponder()
-        
         backgroundColor = UIColor.systemGray4.withAlphaComponent(0.5)
         let menu = UIMenuController.shared
         menu.showMenu(from: self, rect: bounds)

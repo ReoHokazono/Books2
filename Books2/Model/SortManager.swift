@@ -32,6 +32,7 @@ class SortManager: ObservableObject {
             
             if sortKey == .defaultSort && sortAscending == .secondItem {
                 sortKey = .addedDate
+                sortAscending = .secondItem
             }
             
             switch sortKey {
