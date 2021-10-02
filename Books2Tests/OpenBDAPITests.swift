@@ -39,13 +39,13 @@ class OpenBDAPITests: XCTestCase {
         
         //TODO: empty str, isbn-10, invalid str
         
-        let isbn10 = "4150119554"
-        
-        let emptyStr = ""
-        
-        
-        let invalidStr = "abc"
-        wait(for: [downloadExpectation, notFoundExpectation], timeout: 5)
+//        let isbn10 = "4150119554"
+//        
+//        let emptyStr = ""
+//        
+//        
+//        let invalidStr = "abc"
+//        wait(for: [downloadExpectation, notFoundExpectation], timeout: 5)
         
     }
 }
