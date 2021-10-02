@@ -23,6 +23,10 @@ targets:
   Books2:
     type: application
     platform: iOS
+    scheme:
+      testTargets:
+        - Books2UITests
+        - Books2Tests
     deploymentTarget: "14.0"
     sources: Books2
     dependencies:
@@ -30,6 +34,7 @@ targets:
       - package: SwiftUIX
     settings:
       CODE_SIGN_ENTITLEMENTS: Books2/Books2.entitlements
+  
   Books2Tests:
     type: bundle.unit-test
     platform: iOS
@@ -40,6 +45,9 @@ targets:
   Books2UITests:
     type: bundle.ui-testing
     platform: iOS
-    source: Books2UITests
+    scheme: {}
+    sources: [Books2UITests, fastlane/SnapshotHelper.swift]
     dependencies:
       - target: Books2
+    settings:
+      INFOPLIST_FILE: Books2UITests/Info.plist

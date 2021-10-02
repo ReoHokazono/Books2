@@ -48,6 +48,7 @@ struct Settings: View {
                     Spacer().frame(width: 15)
                     Text("書影を表示")
                     Toggle("", isOn: $displayImages)
+                        .accessibilityIdentifier("photoToggle")
                 }
 
                 NavigationLink(

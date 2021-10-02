@@ -17,9 +17,9 @@ class ISBNFormatterTests: XCTestCase {
     
     func testISBNFormatting() {
         XCTAssertEqual(ISBNFormatter().string("9784151200533"), "978 4 15120053 3")
-        XCTAssertEqual(ISBNFormatter().string("978"), "978 ")
-        XCTAssertEqual(ISBNFormatter().string("9784"), "978 4 ")
-        XCTAssertEqual(ISBNFormatter().string("978415120053"), "978 4 15120053 ")
+        XCTAssertEqual(ISBNFormatter().string("978"), "978")
+        XCTAssertEqual(ISBNFormatter().string("9784"), "978 4")
+        XCTAssertEqual(ISBNFormatter().string("978415120053"), "978 4 15120053")
         XCTAssertEqual(ISBNFormatter().string("abc"), "")
     }
 
