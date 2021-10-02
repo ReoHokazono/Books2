@@ -1,3 +1,7 @@
+### XcodeGen
+*.xcodeproj
+*.xcworkspace
+
 ### https://raw.github.com/github/gitignore//Swift.gitignore
 
 # Xcode
