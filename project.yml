@@ -1,0 +1,45 @@
+name: Books2
+
+options:
+  bundleIdPrefix: com.hokazono
+  developmentLanguage: ja
+
+settings:
+  base:
+    MARKETING_VERSION: 1.0.8
+    CURRENT_PROJECT_VERSION: 8
+    DEVELOPMENT_TEAM: GU23RALJBB
+
+packages:
+  SwiftyJSON:
+    url: https://github.com/SwiftyJSON/SwiftyJSON.git
+    branch: master
+
+  SwiftUIX:
+    url: https://github.com/SwiftUIX/SwiftUIX
+    branch: master
+
+targets:
+  Books2:
+    type: application
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources: Books2
+    dependencies:
+      - package: SwiftyJSON
+      - package: SwiftUIX
+    settings:
+      CODE_SIGN_ENTITLEMENTS: Books2/Books2.entitlements
+  Books2Tests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: Books2Tests
+    dependencies:
+      - target: Books2
+
+  Books2UITests:
+    type: bundle.ui-testing
+    platform: iOS
+    source: Books2UITests
+    dependencies:
+      - target: Books2
