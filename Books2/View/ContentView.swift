@@ -39,7 +39,7 @@ struct ContentView: View {
     }
 
     init() {
-        UITableView.appearance().contentInset.top = -20
+//        UITableView.appearance().contentInset.top = -20
     }
         
     var body: some View {
@@ -86,8 +86,8 @@ struct ContentView: View {
                               systemImage:
                                 sortManager.sortAscending == .firstItem && sortManager.sortKey == .defaultSort ?
                                 "arrow.up.arrow.down.square" : "arrow.up.arrow.down.square.fill")
-                            .font(.system(size: 26, weight: .light, design: .default))
-                            .padding([.vertical, .leading])
+//                            .font(.system(size: 26, weight: .light, design: .default))
+//                            .padding([.vertical, .leading])
                     }
                 }
             })

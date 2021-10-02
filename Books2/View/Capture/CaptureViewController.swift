@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-protocol CaptureViewControllerDelegate: class {
+protocol CaptureViewControllerDelegate: AnyObject {
     func isbnCodeDetected(_ isbn:String)
     func notAuthorized()
 }

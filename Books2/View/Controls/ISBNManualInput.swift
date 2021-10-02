@@ -54,7 +54,7 @@ struct ISBNManualInput: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("ISBN").padding(.top, 30)) {
+                Section(header: Text("ISBN")) {
                     ISBNTextField(text: $isbn, isFirstResponder: isTextFieldFirstResponder)
                         .font(.system(.body, design: .monospaced))
                         .onReceive(Just(isbn), perform: { input in
@@ -93,14 +93,28 @@ struct ISBNManualInput: View {
             }
             .navigationTitle("手動で入力")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button("キャンセル", action: {
-                presentedSheet = nil
-            }), trailing: Button("追加", action: {
-                if let record = bookLoader.record {
-                    saveBookInfo(bookInfo: record.bookInfo(context: viewContext))
-                    presentedSheet = nil
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentedSheet = nil
+                    } label: {
+                        Text("キャンセル")
+                    }
                 }
-            }).disabled(bookLoader.record == nil))
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        if let record = bookLoader.record {
+                            saveBookInfo(bookInfo: record.bookInfo(context: viewContext))
+                            presentedSheet = nil
+                        }
+                    } label: {
+                        Text("追加")
+                            .bold()
+                    }
+                    .disabled(bookLoader.record == nil)
+                }
+            }
         }
     }
     

@@ -138,10 +138,19 @@ struct Settings: View {
                     })
 
             }
-            .navigationBarTitle(Text("設定"), displayMode: .inline)
-            .navigationBarItems(trailing: Button("完了", action: {
-                presentedSheet = nil
-            }))
+            .navigationTitle("設定")
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        presentedSheet = nil
+                    } label: {
+                        Text("完了")
+                            .bold()
+                    }
+
+                }
+            })
+            
             .sheet(isPresented: $mailViewPresented, content: {
                 MailView(
                     mailViewPresented: $mailViewPresented,

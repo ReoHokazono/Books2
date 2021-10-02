@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "541649de854d39bc06905d57369feecc2b82e0a7",
+          "revision": "c8acd8e45ed11d90d7ff2d64bd344377c9b888d9",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
         "state": {
           "branch": "master",
-          "revision": "cbf2d4955557abc1ed5debab21d20763e7ebc540",
+          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
           "version": null
         }
       }
