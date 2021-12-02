@@ -51,7 +51,7 @@ struct AboutView: View {
             
             HStack {
                 Spacer()
-                Text("©2020 Reo Hokazono")
+                Text("©2020-2021 Reo Hokazono")
                     .font(.caption)
                 Spacer()
             }

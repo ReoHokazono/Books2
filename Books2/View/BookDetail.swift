@@ -52,11 +52,11 @@ struct BookDetail: View {
                             .fontWeight(.semibold)
                             .longPressCopy(bookInfo.title ?? "")
                             .padding(.bottom, 0.5)
-                        if bookInfo.subtitle != nil {
-                            Text(bookInfo.subtitle!)
+                        if let subtitle = bookInfo.subtitle {
+                            Text(subtitle)
                                 .font(.body)
                                 .foregroundColor(.secondary)
-                                .longPressCopy(bookInfo.subtitle!)
+                                .longPressCopy(subtitle)
                                 .padding(.bottom, 0.5)
                         }
                         
@@ -99,25 +99,25 @@ struct BookDetail: View {
                 }
                 
                 
-                if bookInfo.bookDescription != nil {
+                if let bookDescription = bookInfo.bookDescription {
                     VStack(alignment: .leading) {
                         SectionHeader("あらすじ")
-                        Text(bookInfo.bookDescription!)
+                        Text(bookDescription)
                             .font(.body)
                             .lineSpacing(3)
-                            .longPressCopy(bookInfo.bookDescription!)
+                            .longPressCopy(bookDescription)
                             .padding(.bottom, 15)
                     }
                     
                 }
                 
-                if bookInfo.tableOfContents != nil {
+                if let tableOfContents = bookInfo.tableOfContents {
                     VStack(alignment: .leading) {
                         SectionHeader("目次")
-                        Text(bookInfo.tableOfContents!)
+                        Text(tableOfContents)
                             .font(.body)
                             .lineSpacing(3)
-                            .longPressCopy(bookInfo.tableOfContents!)
+                            .longPressCopy(tableOfContents)
                             .padding(.bottom, 15)
                     }
                 }
@@ -136,27 +136,27 @@ struct BookDetail: View {
                         }
                     }
                     Spacer()
-                    if bookInfo.publisher != nil {
+                    if let publisher = bookInfo.publisher {
                         VStack{
                             Text("出版")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text(bookInfo.publisher!)
+                            Text(publisher)
                                 .font(.body)
                                 .fontWeight(.semibold)
-                                .longPressCopy(bookInfo.publisher!)
+                                .longPressCopy(publisher)
                         }
                     }
                     Spacer()
-                    if bookInfo.publishedDate != nil {
+                    if let publishedDate = bookInfo.publishedDate {
                         VStack{
                             Text("発売日")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text(bookInfo.publishedDate!, formatter: yearFormatter)
+                            Text(publishedDate, formatter: yearFormatter)
                                 .font(.body)
                                 .fontWeight(.semibold)
-                                .longPressCopy(yearFormatter.string(from: bookInfo.publishedDate!))
+                                .longPressCopy(yearFormatter.string(from: publishedDate))
                         }
                         Spacer()
                     }
