@@ -45,7 +45,9 @@ targets:
   Books2UITests:
     type: bundle.ui-testing
     platform: iOS
-    scheme: {}
+    scheme:
+      testTargets:
+        - Books2UITests
     sources: [Books2UITests, fastlane/SnapshotHelper.swift]
     dependencies:
       - target: Books2

@@ -58,13 +58,15 @@ class Books2UITests: XCTestCase {
 
         app.navigationBars["BookNote"].buttons["設定"].tap()
 
+        sleep(1)
+        snapshot("screenshot4")
         toggle.tap()
         app.navigationBars["設定"].buttons["完了"].tap()
 //        app.tables.firstMatch.swipeDown()
 
         app.navigationBars["BookNote"].searchFields["検索"].tap()
         sleep(1)
-        snapshot("screenshot4")
+        snapshot("screenshot5")
     }
     
 //    func testLaunchPerformance() throws {
