@@ -43,7 +43,7 @@ struct ISBNManualInput: View {
     let formatter = ISBNFormatter()
     @State var isbn = ""
     @State var loadedIsbnCode = ""
-    @ObservedObject var bookLoader = BookLoader()
+    @StateObject var bookLoader = BookLoader()
     @State var isTextFieldFirstResponder = false
     @State var isExistItem = false
     
