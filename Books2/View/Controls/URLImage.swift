@@ -13,8 +13,8 @@ struct URLImage: View {
     @StateObject var imageLoader: ImageLoader
     
     var body: some View {
-        if imageLoader.downloadedImage != nil {
-            Image(uiImage: imageLoader.downloadedImage!)
+        if let downloadedImage = imageLoader.downloadedImage {
+            Image(uiImage: downloadedImage)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .border(Color(.systemGray3), width: 0.5)

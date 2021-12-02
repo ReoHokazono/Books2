@@ -26,8 +26,8 @@ struct BookView: View {
                     .font(.headline)
                     .fontWeight(.semibold)
                 
-                if bookInfo.subtitle != nil {
-                    Text(bookInfo.subtitle!)
+                if let subtitle = bookInfo.subtitle {
+                    Text(subtitle)
                     .font(.body)
                     .foregroundColor(.secondary)
                 }

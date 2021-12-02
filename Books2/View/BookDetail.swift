@@ -35,6 +35,26 @@ struct BookDetail: View {
             .padding(.bottom, 5)
     }
     
+    fileprivate func BookInfoItem(_ title: String, itemValue: String) -> some View {
+        VStack {
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Text(itemValue)
+                .font(.body)
+                .fontWeight(.semibold)
+                .longPressCopy(itemValue)
+        }
+    }
+    
+    fileprivate func MultiLineText(_ text: String) -> some View {
+        Text(text)
+            .font(.body)
+            .lineSpacing(3)
+            .longPressCopy(text)
+            .padding(.bottom, 15)
+    }
+    
     var body: some View {
         if isDeletedItem {
             EmptyView()
@@ -52,11 +72,11 @@ struct BookDetail: View {
                             .fontWeight(.semibold)
                             .longPressCopy(bookInfo.title ?? "")
                             .padding(.bottom, 0.5)
-                        if bookInfo.subtitle != nil {
-                            Text(bookInfo.subtitle!)
+                        if let subtitle = bookInfo.subtitle {
+                            Text(subtitle)
                                 .font(.body)
                                 .foregroundColor(.secondary)
-                                .longPressCopy(bookInfo.subtitle!)
+                                .longPressCopy(subtitle)
                                 .padding(.bottom, 0.5)
                         }
                         
@@ -84,7 +104,6 @@ struct BookDetail: View {
                         .hidden(!isUserNoteEditing)
                         .buttonStyle(PlainButtonStyle())
                     }
-                   
                     
                     TextView("", text: $bookInfo.userNote) { _ in
                         self.isUserNoteEditing = true
@@ -93,74 +112,37 @@ struct BookDetail: View {
                         self.saveUserNote()
                     }
                     .isScrollEnabled(false)
-  
-//                    .frame(minHeight: 60)
-//                    .padding(.trailing, 5)
                 }
                 
-                
-                if bookInfo.bookDescription != nil {
+                if let bookDescription = bookInfo.bookDescription {
                     VStack(alignment: .leading) {
                         SectionHeader("あらすじ")
-                        Text(bookInfo.bookDescription!)
-                            .font(.body)
-                            .lineSpacing(3)
-                            .longPressCopy(bookInfo.bookDescription!)
-                            .padding(.bottom, 15)
+                        MultiLineText(bookDescription)
                     }
                     
                 }
                 
-                if bookInfo.tableOfContents != nil {
+                if let tableOfContents = bookInfo.tableOfContents {
                     VStack(alignment: .leading) {
                         SectionHeader("目次")
-                        Text(bookInfo.tableOfContents!)
-                            .font(.body)
-                            .lineSpacing(3)
-                            .longPressCopy(bookInfo.tableOfContents!)
-                            .padding(.bottom, 15)
+                        MultiLineText(tableOfContents)
                     }
                 }
                 
                 HStack(alignment: .center) {
                     if bookInfo.extentValue != 0 {
                         Spacer()
-                        VStack{
-                            Text("ページ数")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text(String(bookInfo.extentValue))
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .longPressCopy(String(bookInfo.extentValue))
-                        }
+                        BookInfoItem("ページ数", itemValue: String(bookInfo.extentValue))
                     }
                     Spacer()
-                    if bookInfo.publisher != nil {
-                        VStack{
-                            Text("出版")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text(bookInfo.publisher!)
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .longPressCopy(bookInfo.publisher!)
-                        }
+                    if let publisher = bookInfo.publisher {
+                        BookInfoItem("出版", itemValue: publisher)
                     }
                     Spacer()
-                    if bookInfo.publishedDate != nil {
-                        VStack{
-                            Text("発売日")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text(bookInfo.publishedDate!, formatter: yearFormatter)
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .longPressCopy(yearFormatter.string(from: bookInfo.publishedDate!))
-                        }
+                    if let publishedDate = bookInfo.publishedDate {
+                        BookInfoItem("発売日", itemValue: yearFormatter.string(from: publishedDate))
                         Spacer()
                     }
-                    
                 }
                 
                 HStack {
@@ -175,7 +157,6 @@ struct BookDetail: View {
                     }
                     Spacer()
                 }
-                
                 
             }
             .listStyle(PlainListStyle())

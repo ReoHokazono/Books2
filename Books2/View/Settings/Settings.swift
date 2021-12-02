@@ -39,64 +39,43 @@ struct Settings: View {
         """
     }()
     
+    fileprivate func FormRow(iconSystemName: String, title: String, item: AnyView? = nil) -> some View {
+        HStack {
+            Image(systemName: iconSystemName)
+                .width(30)
+            Spacer().frame(width: 15)
+            Text(title)
+            if let item = item {
+                item
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             Form {
-                HStack {
-                    Image(systemName: "photo")
-                        .width(30)
-                    Spacer().frame(width: 15)
-                    Text("書影を表示")
-                    Toggle("", isOn: $displayImages)
-                        .accessibilityIdentifier("photoToggle")
-                }
+                FormRow(
+                    iconSystemName: "photo",
+                    title: "書影を表示",
+                    item: AnyView(Toggle("", isOn: $displayImages).accessibilityIdentifier("photoToggle"))
+                )
 
                 NavigationLink(
                     destination: CSVExportView(),
                     label: {
-                        HStack {
-                            Image(systemName: "arrow.up.doc")
-                                .width(30)
-                             Spacer().frame(width: 15)
-                            Text("CSVファイルを出力")
-                        }
+                        FormRow(iconSystemName: "arrow.up.doc", title: "CSVファイルを出力")
                 })
 
                 NavigationLink(
                     destination: iCloudSettingsGuideView(),
                     label: {
-                        HStack {
-                            Image(systemName: "icloud")
-                                .width(30)
-                            Spacer().frame(width: 15)
-                            Text("iCloud同期")
-                        }
+                        FormRow(iconSystemName: "icloud", title: "iCloud同期")
                 })
-            
-//                Button(action: {
-//                    guard let url = URL(string: "https://book-note.netlify.app/help") else {
-//                        return
-//                    }
-//                    openURL(url)
-//                }, label: {
-//                    HStack {
-//                        Image(systemName: "questionmark.circle")
-//                            .width(30)
-//                        Spacer().frame(width: 15)
-//                        Text("使い方・よくある質問")
-//                    }
-//                })
-//                .foregroundColor(.primary)
 
                 Button(action: {
                     contactButtonTapped()
                 }, label: {
-                    HStack {
-                        Image(systemName: "envelope")
-                            .width(30)
-                        Spacer().frame(width: 15)
-                        Text("問い合わせ")
-                    }
+                    FormRow(iconSystemName: "envelope", title: "問い合わせ")
                 })
                 .foregroundColor(.primary)
                 
@@ -107,35 +86,20 @@ struct Settings: View {
                     openURL(url)
                     
                 }, label: {
-                    HStack {
-                        Image(systemName: "star.circle")
-                            .width(30)
-                        Spacer().frame(width: 15)
-                        Text("App Storeで評価")
-                    }
+                    FormRow(iconSystemName: "star.circle", title: "App Storeで評価")
                 })
                 .foregroundColor(.primary)
                 
                 NavigationLink(
                     destination: AcknowledgmentsList(),
                     label: {
-                        HStack {
-                            Image(systemName: "doc.append")
-                                .width(30)
-                            Spacer().frame(width: 15)
-                            Text("謝辞")
-                        }
+                        FormRow(iconSystemName: "doc.append", title: "謝辞")
                     })
                 
                 NavigationLink(
                     destination: AboutView(),
                     label: {
-                        HStack {
-                            Image(systemName: "info.circle")
-                                .width(30)
-                            Spacer().frame(width: 15)
-                            Text("このアプリについて")
-                        }
+                        FormRow(iconSystemName: "info.circle", title: "このアプリについて")
                     })
 
             }

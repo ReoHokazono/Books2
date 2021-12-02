@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CSVExportView: View {
     
-    @ObservedObject var csvExporter = CSVExporter()
+    @StateObject var csvExporter = CSVExporter()
     
     var body: some View {
         Form {

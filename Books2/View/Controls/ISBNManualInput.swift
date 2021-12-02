@@ -43,9 +43,10 @@ struct ISBNManualInput: View {
     let formatter = ISBNFormatter()
     @State var isbn = ""
     @State var loadedIsbnCode = ""
-    @ObservedObject var bookLoader = BookLoader()
+    @StateObject var bookLoader = BookLoader()
     @State var isTextFieldFirstResponder = false
     @State var isExistItem = false
+
     
     init(presentedSheet: Binding<ContentView.ModalPresentedSheet?>) {
         self._presentedSheet = presentedSheet
@@ -55,8 +56,9 @@ struct ISBNManualInput: View {
         NavigationView {
             Form {
                 Section(header: Text("ISBN")) {
-                    ISBNTextField(text: $isbn, isFirstResponder: isTextFieldFirstResponder)
+                    TextField("978 4 XXXXXXXX X", text: $isbn)
                         .font(.system(.body, design: .monospaced))
+                        .keyboardType(.decimalPad)
                         .onReceive(Just(isbn), perform: { input in
                             isbn = ISBNFormatter().string(isbn)
                             if let isbnCode = ISBNFormatter().code(isbn),
@@ -65,9 +67,6 @@ struct ISBNManualInput: View {
                                 bookLoader.download(isbn: isbnCode)
                                 isExistItem = !items.filter({ $0.isbn == isbnCode }).isEmpty
                             }
-                        })
-                        .onAppear(perform: {
-                            isTextFieldFirstResponder = true
                         })
                 }
                 
@@ -91,6 +90,9 @@ struct ISBNManualInput: View {
                     
                 }
             }
+            .onAppear(perform: {
+                isTextFieldFirstResponder = true
+            })
             .navigationTitle("手動で入力")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
